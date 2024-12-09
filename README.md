@@ -109,18 +109,19 @@ We aim to reduce costs through its gasless transactions.
 
 2. **Ephemeral Rollups**: Our integration with MagicBlock's Ephemeral Rollups enables gas-less transactions for drawing winners, enhancing scalability and reducing on-chain transaction costs.
 
-3. **Verifiable Random Function (VRF)** (in progress): We incorporate a secure randomness source using a VRF, ensuring fair and tamper-resistant prize drawings.
+3. **Verifiable Random Function (VRF)**: We incorporate a secure randomness source offered by feed protocol, ensuring fair and tamper-resistant prize drawings.
 
-4. **Merkle Tree for Eligibility** (confirmed in prototype): For private raffles, we use a Merkle tree to efficiently verify user eligibility without storing all eligible addresses on-chain.
+4. **Merkle Tree for Eligibility**: For private raffles, we use a Merkle tree to efficiently verify user eligibility without storing all eligible addresses on-chain.
 
 ### Staking
 
 `staking` program is located in the `programs/staking` directory.
 For more details, please see [programs/staking/README.md](programs/staking/README.md).
 
-The deposit and withdrawal functionalities are not implemented yet.
-Currently, we are verifying the process of minting a Metaplex Core NFT programmatically when a user creates an account at the start of staking.
-We are also conducting experiments with Attribute plugin to dynamically add attributes to NFTs.
+The deposit and withdrawal functionalities are implemented in `vault` program in `programs/vault` directory separately.
+
+Historically, we verified the process of minting a Metaplex Core NFT programmatically when a user creates an account at the start of staking with `staking` program.
+We also conducted experiments with Attribute plugin to dynamically add attributes to NFTs.
 
 #### Technical Implementation Highlights
 
