@@ -24,34 +24,39 @@ pub struct Redeem<'info> {
 pub fn redeem(
     ctx: Context<Redeem>,
     tickets_allocated: u64,
-    // proof: Vec<[u8; 32]>,
+    proof: Vec<[u8; 32]>,
 ) -> Result<()> {
-    // TODO: Verify raffle status
+    let raffle = &ctx.accounts.raffle;
 
-    // TODO: Verify if a corresponding compressed account exists or not
+    // Verify raffle status and timestamps
+    require!(raffle.is_active, ErrorCode::RaffleInactive);
+    raffle.check_timestamp(Clock::get()?.unix_timestamp)?;
 
-    if !ctx.accounts.raffle.is_public {
-        // TODO: Verify the number of tickets using a Merkle tree
+    if !raffle.is_public {
+        // Verify the number of tickets using a Merkle tree
+        let node = hashv(&[
+            &[0u8],
+            &hashv(&[&ctx.accounts.user_authority.key().to_bytes()]).to_bytes(),
+            &tickets_allocated.to_le_bytes(),
+        ]);
 
-        // Implement Merkle tree verification logic here
-        // This should include:
-        // 1. Retrieving the Merkle root from the raffle account
-        // 2. Calculating the leaf node for the current user and ticket amount
-        // 3. Verifying the Merkle proof provided by frontend against the root
-        // 4. Ensuring the calculated leaf is part of the Merkle tree
-        // If verification fails, return an error
+        require!(
+            verify(proof, ctx.accounts.raffle.merkle_root, node.to_bytes()),
+            ErrorCode::InvalidProof
+        );
     } else {
-        // TODO: Verify the number of tickets allowed per user
+        // Verify the number of tickets allowed per user
+        require!(
+            raffle.max_tickets_per_user >= tickets_allocated,
+            ErrorCode::InvalidNumTickets
+        );
     }
 
     let ur = &mut ctx.accounts.user_record;
     ur.tickets_allocated = tickets_allocated;
     ur.user_authority = ctx.accounts.user_authority.key();
-    ur.raffle = ctx.accounts.raffle.key();
-
-    // From here on, the user has either:
-    //   1. UserRecord as a normal Solana account
-    //   2. UserRecord as a zk compressed account
+    ur.raffle = raffle.key();
+    ur.bump = ctx.bumps.user_record;
 
     Ok(())
 }

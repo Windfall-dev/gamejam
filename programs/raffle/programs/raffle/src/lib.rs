@@ -43,14 +43,14 @@ pub mod raffle {
     pub fn redeem(
         ctx: Context<Redeem>,
         tickets_allocated: u64,
-        // proof: Vec<[u8; 32]>,
+        proof: Vec<[u8; 32]>,
     ) -> Result<()> {
-        instructions::redeem(ctx, tickets_allocated)
+        instructions::redeem(ctx, tickets_allocated, proof)
     }
 
     pub fn draw(ctx: Context<Draw>, tickets_to_draw: u64) -> Result<()> {
         instructions::draw(ctx, tickets_to_draw)
-    }
+    }   
 
     pub fn delegate(
         ctx: Context<Delegate>,
