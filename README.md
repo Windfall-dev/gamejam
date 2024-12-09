@@ -16,6 +16,7 @@
 - Light Protocol (ZK Compression)
 - MagicBlock Ephemeral Rollups
 - Metaplex Core NFT
+- feed protocol RNG
 - Solana Actions & Blinks
 
 ### AWS API Gateway, Lambda (FastAPI), and DynamoDB Integration
