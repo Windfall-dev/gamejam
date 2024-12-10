@@ -8,8 +8,8 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { RankingUserProps } from "@/hooks/useAddPoints";
 import { useAuth } from "@/hooks/useAuth";
+import { RankingUserProps } from "@/hooks/usePoints";
 
 import { Button } from "./ui/button";
 import { Card, CardHeader, CardTitle } from "./ui/card";

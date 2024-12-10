@@ -13,8 +13,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { RankingUserProps, useAddPoints } from "@/hooks/useAddPoints";
 import { useAuth } from "@/hooks/useAuth";
+import { RankingUserProps, usePoints } from "@/hooks/usePoints";
 
 import Loading from "../../../components/Loading";
 import PopupResultDeposit from "../../../components/PopupResultDeposit";
@@ -39,14 +39,13 @@ export function Popup({ actionType, amount }: AlertProp) {
   const { publicKey, sendTransaction } = useWallet();
 
   const context = useAuth();
-  const { handleAddPoints, user, setUser } = useAddPoints();
+  const { addPoints, user, setUser } = usePoints();
   const { handleDeposit, handleWithdraw } = useVault({
     amount,
     setDialogState,
   });
 
   const userId = context.userId.slice(0, 4) + ".." + context.userId.slice(-4);
-
   useEffect(() => {
     const fetchRankings = async () => {
       try {
@@ -100,7 +99,7 @@ export function Popup({ actionType, amount }: AlertProp) {
         throw new Error("Deposit transaction failed.");
       }
 
-      await handleAddPoints(parseFloat(amount), context.userId);
+      await addPoints(signature, context.userId);
       return signature;
     }
     if (actionType === "withdraw") {

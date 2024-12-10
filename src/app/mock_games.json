@@ -1,8 +1,8 @@
 [
   {
-    "imagePath": "/game_thumb_sample1.png",
-    "gameTitle": "Beat Pet",
-    "caption": "Music",
+    "imagePath": "/bonk_image.png",
+    "gameTitle": "Bonk the Digger",
+    "caption": "Bonk",
     "gameUrl": "game/play",
     "isPlayable": true
   },

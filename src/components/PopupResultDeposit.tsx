@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { RankingUserProps } from "@/hooks/useAddPoints";
+import { RankingUserProps } from "@/hooks/usePoints";
 
 import { InfoDouble } from "./Info";
 

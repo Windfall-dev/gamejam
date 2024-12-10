@@ -1,19 +1,28 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+
+import { usePoints } from "@/hooks/usePoints";
 
 import { InfoSingle } from "./Info";
 
 function TopKv() {
+  const { user, fetchPoints } = usePoints();
+
+  useEffect(() => {
+    fetchPoints();
+    console.log("userpoints: ", user.points);
+  }, [user, fetchPoints]);
+
   return (
     <div className="relative z-0 h-80 px-[30px] pb-[30px] pt-10">
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="w-[220px] space-y-2">
           <h2>Enjoy &quot;Lossless & Fun&quot; Gaming</h2>
-          {/* <p className="text-body-bold text-muted-foreground">
-            Earn Prizes through Staking and Playing Games!
-          </p> */}
         </div>
-        <InfoSingle />
+        <InfoSingle title="Prize Pool" text="10,000,000" isButton={true} />
+        <InfoSingle title="Your LUCK" text={user.points} isButton={false} />
       </div>
       <Image
         src="/top_kv_sp.png"

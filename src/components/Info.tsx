@@ -4,20 +4,27 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-function InfoSingle() {
+interface InfoSingleProps {
+  title: string;
+  text: string;
+  isButton: boolean;
+}
+function InfoSingle({ title, text, isButton }: InfoSingleProps) {
   return (
     <div className="rounded-lg border-2 border-wf-yellow bg-white bg-opacity-80 px-4 py-3 shadow-sm">
       <div className="flex items-center justify-between pb-1">
-        <div className="text-body-title text-wf-red">Prize Pool</div>
-        <Link href="/staking">
-          <Button size="S">
-            <p className="text-body2_bold">DEPOSIT &gt;</p>
-          </Button>
-        </Link>
+        <div className="text-body-title text-wf-red">{title}</div>
+        {isButton && (
+          <Link href="/staking">
+            <Button size="S">
+              <p className="text-body2_bold">DEPOSIT &gt;</p>
+            </Button>
+          </Link>
+        )}
       </div>
       <div className="flex items-center space-x-1">
         <Image src="/icon_dollar.png" width={32} height={32} alt="Dollar" />
-        <h1>10,000,000</h1>
+        <h1>{text}</h1>
       </div>
     </div>
   );

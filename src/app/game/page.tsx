@@ -8,7 +8,7 @@ const GamePage: React.FC = () => (
   <main className="mx-auto bg-transparent">
     <div className="relative aspect-square overflow-hidden">
       <Image
-        src="/game_thumb_sample1.png"
+        src="/bonk_image.png"
         fill={true}
         alt="Game Thumb"
         objectFit="contain"
@@ -19,7 +19,7 @@ const GamePage: React.FC = () => (
       <div className="flex flex-col items-center">
         <div className="flex w-full justify-center bg-gradient-to-t from-white to-white/0">
           <Image
-            src="/game_icon_01.png"
+            src="/bonk_top_title.png"
             height={120}
             width={120}
             alt="game icon"
@@ -27,8 +27,8 @@ const GamePage: React.FC = () => (
           />
         </div>
         <div className="px-5 py-4 text-center">
-          <p className="text-body-bold text-muted-foreground">Music</p>
-          <h3>BEAT PET</h3>
+          <p className="text-body-bold text-muted-foreground">Bonk</p>
+          <h3>Bonk the Digger</h3>
           {/* <p className="body text-muted-foreground">
             In Beat Pet, cute pets will test your sense of <br /> rhythm and
             luck!
